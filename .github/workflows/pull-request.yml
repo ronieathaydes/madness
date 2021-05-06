@@ -14,9 +14,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           architecture: x64
-      - run: curl --output quality/detekt/detekt-cli.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-cli-1.16.0-all.jar
-      - run: curl --output quality/detekt/detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
-      - run: java -jar quality/detekt/detekt-cli.jar --build-upon-default-config --report xml:build/reports/detekt/detekt-report.xml --plugins quality/detekt/detekt-formatting.jar
+      - run: curl --output detekt-cli.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-cli-1.16.0-all.jar
+      - run: curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
+      - run: java -jar detekt-cli.jar --report xml:detekt-report.xml --plugins detekt-formatting.jar
       - name: Run Danger
         uses: danger/kotlin@1.0.0-beta
         env:
