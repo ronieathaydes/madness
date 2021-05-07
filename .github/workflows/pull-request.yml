@@ -20,10 +20,11 @@ jobs:
           curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - name: Run detekt
         run: |
-          echo "$(git branch -a)"
+          # Fetch base branch
+          git fetch origin "${{ github.base_ref }}" --depth=1
 
           # Collects modified files eligible for validation
-          files="$(git diff remotes/origin/$GITHUB_BASE_REF --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
+          files="$(git diff origin/${{ github.base_ref }} --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
 
           # Skips validation when there is no files
           if [[ -z "$files" ]]; then
