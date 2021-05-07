@@ -20,6 +20,8 @@ jobs:
           curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - name: Run detekt
         run: |
+          echo "$(git branch -a)"
+
           # Collects modified files eligible for validation
           files="$(git diff remotes/origin/$GITHUB_BASE_REF --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
 
