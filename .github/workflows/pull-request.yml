@@ -18,7 +18,7 @@ jobs:
       - run: curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - run: java -jar detekt-cli.jar --report xml:detekt-report.xml --plugins detekt-formatting.jar
       - name: Run Danger
-        uses: danger/kotlin@1.0.0-beta
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
