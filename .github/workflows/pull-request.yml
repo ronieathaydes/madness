@@ -21,15 +21,15 @@ jobs:
       - name: Run detekt
         shell: bash
         run: |
-          set -x
-
           # Fetch base branch
           echo "Fetch base branch"
           git fetch origin "${{ github.base_ref }}" --depth=1
 
           # Collects modified files eligible for validation
           echo "Collects modified files eligible for validation"
-          files="$(git diff "origin/${{ github.base_ref }}" --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
+          # files="$(git diff "origin/${{ github.base_ref }}" --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
+          $files=(git diff --diff-filter=d --name-only "origin/${{ github.base_ref }}" ${{ github.sha }})
+          echo $files
 
           # Skips validation when there is no files
           echo "Skips validation when there is no files"
