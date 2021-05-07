@@ -20,6 +20,8 @@ jobs:
           curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - name: Run detekt
         run: |
+          echo "$GITHUB_BASE_REF"
+
           # Collects modified files eligible for validation
           files="$(git diff origin/$GITHUB_BASE_REF --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
 
@@ -37,7 +39,7 @@ jobs:
 
           # Exit with success
           exit 0
-      - name: Run Danger
+      - name: Run danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
