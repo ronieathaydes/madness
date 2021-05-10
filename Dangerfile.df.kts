@@ -1,3 +1,4 @@
+@file:Suppress("style.MaxLineLength")
 @file:DependsOn("io.github.ackeecz:danger-kotlin-detekt:0.1.4")
 
 import io.github.ackeecz.danger.detekt.DetektPlugin
