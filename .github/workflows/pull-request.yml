@@ -19,36 +19,8 @@ jobs:
           curl --output detekt-cli.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-cli-1.16.0-all.jar
           curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - name: Run detekt
-        shell: bash
         run: |
-          # Fetch base branch
-          echo "Fetch base branch"
-          git fetch origin "${{ github.base_ref }}" --depth=1
-
-          # Collects modified files eligible for validation
-          echo "Collects modified files eligible for validation"
-          # files="$(git diff "origin/${{ github.base_ref }}" --diff-filter=d --name-only --cached --relative | grep '\.kt[s"]\?$')"
-          $files=(git diff --diff-filter=d --name-only "origin/${{ github.base_ref }}" ${{ github.sha }})
-          echo $files
-
-          # Skips validation when there is no files
-          echo "Skips validation when there is no files"
-          if [[ -z "$files" ]]; then
-            echo "Done"
-            exit 0
-          fi
-
-          # Builds a comma-separated list with file paths (required by detekt)
-          echo "Builds a comma-separated list with file paths (required by detekt)"
-          detekt_input="$(echo ${files} | tr ' ' ',')"
-
-          # Runs detekt analysis
-          echo "Runs detekt analysis"
-          java -jar detekt-cli.jar --report xml:detekt-report.xml --plugins detekt-formatting.jar --input "${detekt_input}"
-
-          # Exit with success
-          echo "Exit with success"
-          exit 0
+          java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml
       - name: Run danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         env:
