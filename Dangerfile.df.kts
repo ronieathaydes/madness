@@ -3,7 +3,11 @@
 import io.github.ackeecz.danger.detekt.DetektPlugin
 
 import systems.danger.kotlin.danger
+import systems.danger.kotlin.fail
+import systems.danger.kotlin.message
+import systems.danger.kotlin.onGitHub
 import systems.danger.kotlin.register
+import systems.danger.kotlin.warn
 
 import java.io.File
 
