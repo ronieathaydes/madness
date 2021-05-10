@@ -1,9 +1,9 @@
-@file:DependsOn("io.vithor.danger.plugins:detekt-plugin:0.0.5")
+@file:DependsOn("io.github.ackeecz:danger-kotlin-detekt:0.1.4")
 
 import io.vithor.danger.plugins.detekt.Detekt
 import systems.danger.kotlin.*
 
-register plugin Detekt
+register plugin DetektPlugin
 
 danger(args) {
 
@@ -30,8 +30,6 @@ danger(args) {
             warn("This Pull Request is quite a big one! Maybe try splitting this into separate tasks next time 😅")
         }
     }
-}
 
-Detekt.report {
-    path = "detekt-report.xml"
+    DetektPlugin.parseAndReport(File("detekt-report.xml"))
 }
