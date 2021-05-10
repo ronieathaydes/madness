@@ -30,8 +30,8 @@ danger(args) {
             warn("This Pull Request is quite a big one! Maybe try splitting this into separate tasks next time 😅")
         }
     }
+}
 
-    Detekt.report {
-        path = "detekt-report.xml"
-    }
+Detekt.report {
+    path = "detekt-report.xml"
 }
