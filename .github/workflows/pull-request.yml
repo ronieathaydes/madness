@@ -20,7 +20,7 @@ jobs:
           curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
       - name: Run detekt
         run: |
-          java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml
+          java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml --config quality/detekt/detekt-config.yml
       - name: Run danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         if: always()
