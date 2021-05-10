@@ -21,6 +21,7 @@ jobs:
       - name: Run detekt
         run: |
           java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml
+          echo "Done"
       - name: Run danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
         env:
