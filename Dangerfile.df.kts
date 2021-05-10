@@ -2,7 +2,8 @@
 
 import io.github.ackeecz.danger.detekt.DetektPlugin
 
-import systems.danger.kotlin.*
+import systems.danger.kotlin.danger
+import systems.danger.kotlin.register
 
 import java.io.File
 
