@@ -1,4 +1,9 @@
+@file:DependsOn("io.vithor.danger.plugins:detekt-plugin:0.0.5")
+
+import io.vithor.danger.plugins.detekt.Detekt
 import systems.danger.kotlin.*
+
+register plugin Detekt
 
 danger(args) {
 
@@ -24,5 +29,9 @@ danger(args) {
         if ((pullRequest.additions ?: 0) - (pullRequest.deletions ?: 0) > 300) {
             warn("This Pull Request is quite a big one! Maybe try splitting this into separate tasks next time 😅")
         }
+    }
+
+    Detekt.report {
+        path = "detekt-report.xml"
     }
 }
