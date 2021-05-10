@@ -1,7 +1,10 @@
 @file:DependsOn("io.github.ackeecz:danger-kotlin-detekt:0.1.4")
 
-import io.vithor.danger.plugins.detekt.Detekt
+import io.github.ackeecz.danger.detekt.DetektPlugin
+
 import systems.danger.kotlin.*
+
+import java.io.File
 
 register plugin DetektPlugin
 
