@@ -1,4 +1,18 @@
-import systems.danger.kotlin.*
+@file:Suppress("MaxLineLength", "MagicNumber")
+@file:DependsOn("io.github.ackeecz:danger-kotlin-detekt:0.1.4")
+
+import io.github.ackeecz.danger.detekt.DetektPlugin
+
+import systems.danger.kotlin.danger
+import systems.danger.kotlin.fail
+import systems.danger.kotlin.message
+import systems.danger.kotlin.onGitHub
+import systems.danger.kotlin.register
+import systems.danger.kotlin.warn
+
+import java.io.File
+
+register plugin DetektPlugin
 
 danger(args) {
 
@@ -25,4 +39,6 @@ danger(args) {
             warn("This Pull Request is quite a big one! Maybe try splitting this into separate tasks next time 😅")
         }
     }
+
+    DetektPlugin.parseAndReport(File("detekt-report.xml"))
 }

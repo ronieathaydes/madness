@@ -3,6 +3,30 @@ name: Pull Request
 on: pull_request
 
 jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          architecture: x64
+      - name: Install detekt
+        run: |
+          curl --output detekt-cli.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-cli-1.16.0-all.jar
+          curl --output detekt-formatting.jar -sSLO https://github.com/detekt/detekt/releases/download/v1.16.0/detekt-formatting-1.16.0.jar
+      - name: Run detekt
+        run: |
+          java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml --config quality/detekt/detekt-config.yml
+      - name: Run danger
+        uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -14,10 +38,6 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           architecture: x64
-      - name: Run Danger
-        uses: danger/kotlin@1.0.0-beta
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build app
         run: ./gradlew assembleDebug
       - name: Run tests
