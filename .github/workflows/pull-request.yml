@@ -23,7 +23,7 @@ jobs:
           name: lint-results-debug.xml
           path: app/build/reports/lint-results-debug.xml
 
-  danger:
+  detekt:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -47,9 +47,17 @@ jobs:
         with:
           name: detekt-report.xml
           path: detekt-report.xml
+
+  danger:
+    runs-on: ubuntu-latest
+    needs: detekt
+    if: always()
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: detekt-report.xml
       - name: Run danger
         uses: docker://ghcr.io/danger/danger-kotlin:1.0.0-beta
-        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
