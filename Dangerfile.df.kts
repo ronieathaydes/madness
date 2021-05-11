@@ -14,6 +14,7 @@ import systems.danger.kotlin.warn
 
 import java.io.File
 
+register plugin AndroidLint
 register plugin DetektPlugin
 
 danger(args) {
