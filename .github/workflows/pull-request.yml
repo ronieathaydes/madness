@@ -55,7 +55,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
+      - name: Download lint report
+        uses: actions/download-artifact@v2
+        with:
+          name: lint-results-debug.xml
+      - name: Download detekt report
+        uses: actions/download-artifact@v2
         with:
           name: detekt-report.xml
       - name: Run danger
