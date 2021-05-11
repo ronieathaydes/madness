@@ -50,7 +50,7 @@ jobs:
 
   danger:
     runs-on: ubuntu-latest
-    needs: detekt
+    needs: [lint,detekt]
     if: always()
     steps:
       - name: Checkout repository
