@@ -29,6 +29,10 @@ android {
             )
         }
     }
+    buildFeatures {
+        compose = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -41,12 +45,12 @@ android {
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
         )
     }
-    buildFeatures {
-        compose = true
-    }
     composeOptions {
         kotlinCompilerExtensionVersion = rootProject.extra["composeVersion"] as String
-        kotlinCompilerVersion = "1.4.32"
+    }
+
+    lint {
+        ignore("ObsoleteLintCustomCheck")
     }
 }
 
