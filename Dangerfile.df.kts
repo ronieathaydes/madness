@@ -1,6 +1,8 @@
 @file:Suppress("MaxLineLength", "MagicNumber")
+@file:DependsOn("com.gianluz:danger-kotlin-android-lint-plugin:0.1.0")
 @file:DependsOn("io.github.ackeecz:danger-kotlin-detekt:0.1.4")
 
+import com.gianluz.dangerkotlin.androidlint.AndroidLint
 import io.github.ackeecz.danger.detekt.DetektPlugin
 
 import systems.danger.kotlin.danger
@@ -12,6 +14,7 @@ import systems.danger.kotlin.warn
 
 import java.io.File
 
+register plugin AndroidLint
 register plugin DetektPlugin
 
 danger(args) {
@@ -39,6 +42,8 @@ danger(args) {
             warn("This Pull Request is quite a big one! Maybe try splitting this into separate tasks next time 😅")
         }
     }
+
+    AndroidLint.report("lint-results-debug.xml")
 
     DetektPlugin.parseAndReport(File("detekt-report.xml"))
 }
