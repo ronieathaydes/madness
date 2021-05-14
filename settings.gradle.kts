@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Madness"
 include(":app")
+include(":home")
