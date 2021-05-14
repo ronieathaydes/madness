@@ -17,11 +17,14 @@ jobs:
       - name: Run lint
         run: |
           ./gradlew lintDebug
+      - name: Merge reports
+        run: |
+          python3 quality/lint/merge-lint-reports.py
       - name: Upload report
         uses: actions/upload-artifact@v2
         with:
           name: lint-results-debug.xml
-          path: app/build/reports/lint-results-debug.xml
+          path: merged-lint-results-debug.xml
 
   detekt:
     runs-on: ubuntu-latest
