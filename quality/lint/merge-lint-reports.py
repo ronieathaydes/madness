@@ -22,7 +22,7 @@ for path in report_paths:
         else:
             merged_report_content.extend(data)
 
-merged_report_file_name = 'merged-lint-results-debug.xml'
+merged_report_file_name = 'lint-results-debug.xml'
 
 merged_report = open(merged_report_file_name, 'w')
 merged_report.write('<?xml version=\"1.0\" encoding=\"utf-8\"?>\n')
