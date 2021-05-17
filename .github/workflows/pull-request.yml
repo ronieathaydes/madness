@@ -45,6 +45,7 @@ jobs:
         run: |
           set +e
           java -jar detekt-cli.jar --plugins detekt-formatting.jar --report xml:detekt-report.xml --config quality/detekt/detekt-config.yml
+          exit 0
       - name: Upload report
         uses: actions/upload-artifact@v2
         if: always()
